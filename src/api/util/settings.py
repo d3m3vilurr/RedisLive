@@ -1,10 +1,12 @@
 import json
+import os
 
 def get_settings():
     """Parses the settings from redis-live.conf.
     """
     # TODO: Consider YAML. Human writable, machine readable.
-    return json.load(open("redis-live.conf"))
+    CONFIG_PATH = os.environ.get('REDISLIVE_CONF_PATH', "redis-live.conf")
+    return json.load(open(CONFIG_PATH))
 
 def get_redis_servers():
     config = get_settings()
